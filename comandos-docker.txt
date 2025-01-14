@@ -1,0 +1,44 @@
+ # Rodar container Postgre na versão 16.6
+ docker run --name librarydb -p 5432:5432 -e
+ POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres
+ -e POSTGRES_DB=library postgres:16.6
+
+# Rodar container pgadmin4
+ docker run --name pgadmin4 -p 15432:80 -e PGADMI
+N_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin d
+page/pgadmin4
+
+#Create network
+docker create network library-network
+
+
+# Para mostrar todos os serviços e as portas
+netstat -aof
+# Para mostrar uma porta
+netstat -aof | findstr 5432
+
+-- Table: public.livro
+
+-- DROP TABLE IF EXISTS public.livro;
+
+CREATE TABLE IF NOT EXISTS public.livro
+(
+    id uuid NOT NULL,
+    data_publicacao date,
+    genero character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    isbn character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    preco numeric(18,2),
+    titulo character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    id_autor uuid,
+    CONSTRAINT livro_pkey PRIMARY KEY (id),
+    CONSTRAINT fk7v25m35cptaoro3f0xq6chy37 FOREIGN KEY (id_autor)
+        REFERENCES public.autor (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT livro_genero_check CHECK (genero::text = ANY (ARRAY['FICCAO'::character varying, 'ROMANCE'::character varying, 'SUSPENSE'::character varying, 'POLICIAL'::character varying, 'TERROR'::character varying, 'COMEDIA'::character varying, 'BIOGRAFIA'::character varying, 'CIENCIA'::character varying, 'FANTASIA'::character varying, 'MISTERIO'::character varying, 'AÇAO'::character varying]::text[]))
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.livro
+    OWNER to postgres;
