@@ -106,4 +106,34 @@ class LivroRepositoryTest {
         List<Livro> lista = repository.findByIsbn("9521776210");
         lista.forEach(System.out::println);
     }
+
+    @Test
+    void listarLivrosComQueryJPQL(){
+        var resultado = repository.listarTodosOrdenadoPorTituloAndPreco();
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void listarAutoresDosLivros(){
+        var resultado = repository.listarAutoresDosLivros();
+        resultado.forEach(System.out::println);
+    }
+
+    @Test
+    void listarGenerosDeAutoresNorteAmericanos(){
+        var resultado = repository.listarGenerosAutoresNorteAmericano();
+        resultado.forEach(System.out::println);
+    }
+
+
+    @Test
+    void deletePorGeneroTest(){
+        repository.deleteByGenero(GeneroLivro.BIOGRAFIA);
+    }
+
+    @Test
+    void updateDataPublicacaoTest(){
+        repository.upadteDataPublicacao(LocalDate.of(2000, 1, 1));
+    }
+
 }
