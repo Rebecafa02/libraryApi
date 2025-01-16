@@ -49,6 +49,7 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
     """)
     List<String> listarGenerosAutoresNorteAmericano();
 
+
     //usando @query para sobrescrever um query method
     @Query("select l from Livro l where l.genero = :nomeDoParametro")
     List<Livro> findByGenero(@Param("nomeDoParametro")GeneroLivro generoLivro);
@@ -62,4 +63,7 @@ public interface LivroRepository extends JpaRepository<Livro, UUID> {
     @Transactional
     @Query("update Livro set dataPublicacao = ?1")
     void upadteDataPublicacao(LocalDate novaData );
+
+    boolean existsByAutor(Autor autor);
+
 }

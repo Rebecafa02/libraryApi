@@ -24,14 +24,14 @@ class LivroRepositoryTest {
     @Test
     void salvarTest(){
         Livro livro = new Livro();
-        livro.setTitulo("Dandara dos Palmares");
-        livro.setIsbn("985214763");
-        livro.setGenero(GeneroLivro.BIOGRAFIA);
-        livro.setPreco(BigDecimal.valueOf(75));
-        livro.setDataPublicacao(LocalDate.of(2000, 11, 12));
+        livro.setTitulo("Noite de verão");
+        livro.setIsbn("85122346997");
+        livro.setGenero(GeneroLivro.ROMANCE);
+        livro.setPreco(BigDecimal.valueOf(40));
+        livro.setDataPublicacao(LocalDate.of(2015, 10, 12));
 
         Autor autor = autorRepository
-                .findById(UUID.fromString("0243e095-26e1-4620-9ee5-6d8bcef19f26"))
+                .findById(UUID.fromString("efa8dc1d-75eb-478c-a499-4623dc0333cf"))
                 .orElse(null);
 
         livro.setAutor(autor);
