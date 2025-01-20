@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(exclude = "livros")
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class) //para ouvir quando tiver mudanças e registrar a data e horario
 public class Autor {
 
     @Id
